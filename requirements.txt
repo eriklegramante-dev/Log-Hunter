@@ -1,0 +1,2 @@
+# LogHunter uses standard Python libraries (built-in).
+# No external dependencies required!
