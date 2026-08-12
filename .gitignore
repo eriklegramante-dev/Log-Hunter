@@ -27,6 +27,7 @@ dist/
 dataset/*.log
 dataset/*.gz
 *.log
+dataset/
 
 # Caso queira manter apenas um arquivo de log de exemplo no Git, 
 # você pode descomentar a linha abaixo:
