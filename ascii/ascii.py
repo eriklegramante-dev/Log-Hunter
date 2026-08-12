@@ -1,12 +1,4 @@
-# Cores ANSI
-RED = "\033[91m"
-GREEN = "\033[92m"
-YELLOW = "\033[93m"
-CYAN = "\033[96m"
-RESET = "\033[0m"
-BOLD = "\033[1m"
-
-BANNER = f"""{CYAN}{BOLD}
+BANNER = r"""
                .-+...-+#+-.                         
              ###+-###+---. +#.                      
           .#############+.   ++                     
@@ -39,8 +31,11 @@ BANNER = f"""{CYAN}{BOLD}
  | |__| (_) | (_| |  _  | |_| | | | | ||  __/ |   
  |_____\___/ \__, |_| |_|\__,_|_| |_|\__\___|_|   
              |___/                                        
-                                                       
-{RESET}"""
+"""
 
 def show_banner():
-    print(BANNER)
+    RED = "\033[91m"
+    RESET = "\033[0m"
+
+
+    print(f"{RED}{BANNER}{RESET}")
