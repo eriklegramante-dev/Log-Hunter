@@ -16,7 +16,7 @@ def main():
 
     parser = argparse.ArgumentParser(description="LogHunter - Fast log analysis tool for terminal")
     parser.add_argument("file", help="Path to target log file (.log, .txt, .gz)")
-    parser.add_argument("-d", "--default", action="store_true", help="Run standard default analysis (IPs, Status Codes, Errors, Dates)")
+    parser.add_argument("-d", "--default", action="store_true", help="Run standard default analysis")
     parser.add_argument("-l", "--limit", type=int, default=1000, help="Limit number of lines analyzed (Default: 1000)")
     parser.add_argument("-o", "--output", type=str, help="Export results to file (.json or .csv)")
     
@@ -30,6 +30,11 @@ def main():
     results = analyze_logs(log_stream)
 
     print(f"{GREEN}[+]{RESET} Log Format Detected: {BOLD}{results['format']}{RESET}")
+    print(f"    [RANGE] {results['start_date']}  ->  {results['end_date']}")
+
+    if results["log_levels"]:
+        levels_str = " | ".join([f"{lvl}: {count}" for lvl, count in results["log_levels"].items()])
+        print(f"    [LEVELS] {levels_str}")
 
     print(f"\n{GREEN}[+]{RESET} Potential IPs Found (Top 5):")
     if results["top_ips"]:
@@ -38,16 +43,26 @@ def main():
     else:
         print("    No IP addresses identified.")
 
-    # Status Codes
+    if results["methods"] or results["top_endpoints"]:
+        print(f"\n{GREEN}[+]{RESET} Traffic & Endpoints:")
+        if results["methods"]:
+            methods_str = " | ".join([f"{m}: {c}" for m, c in results["methods"].items()])
+            print(f"    [METHODS] {methods_str}")
+        if results["top_endpoints"]:
+            print(f"    [TOP ENDPOINTS]")
+            for ep, count in results["top_endpoints"]:
+                print(f"        -> {ep} ({count}x)")
+
     if results["status_codes"]:
         print(f"\n{GREEN}[+]{RESET} HTTP Status Code Distribution:")
         for code, count in sorted(results["status_codes"].items()):
             color = GREEN if code.startswith('2') else (YELLOW if code.startswith('3') else RED)
             print(f"    {color}[HTTP {code}]{RESET} -> {count} requests")
 
-    print(f"\n{GREEN}[+]{RESET} Extracted Time Range:")
-    print(f"    [START] {results['start_date']}")
-    print(f"    [END]   {results['end_date']}")
+    if results["top_user_agents"]:
+        print(f"\n{GREEN}[+]{RESET} Top User-Agents Detected:")
+        for ua, count in results["top_user_agents"]:
+            print(f"    [UA] {ua[:70]}... ({count}x)")
 
     if results["top_errors"]:
         print(f"\n{RED}[!]{RESET} High Occurrence Warnings/Errors:")
