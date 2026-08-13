@@ -113,7 +113,7 @@
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/loghunter.git
+git clone https://github.com/eriklegramante-dev/loghunter.git
 cd loghunter
 ```
 
