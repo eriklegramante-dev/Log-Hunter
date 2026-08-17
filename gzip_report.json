@@ -1,0 +1,48 @@
+{
+    "format": "Web Server Log (Nginx/Apache)",
+    "top_ips": [
+        [
+            "203.0.113.195",
+            112
+        ],
+        [
+            "10.0.0.52",
+            106
+        ],
+        [
+            "192.168.1.15",
+            100
+        ],
+        [
+            "198.51.100.4",
+            95
+        ],
+        [
+            "45.33.32.156",
+            87
+        ]
+    ],
+    "total_ips_unique": 5,
+    "status_codes": {
+        "200": 500
+    },
+    "methods": {
+        "GET": 500
+    },
+    "top_endpoints": [
+        [
+            "/archive/data",
+            500
+        ]
+    ],
+    "log_levels": {},
+    "top_user_agents": [
+        [
+            "curl/7.88.1",
+            500
+        ]
+    ],
+    "start_date": "17/Aug/2026:09:00:00",
+    "end_date": "17/Aug/2026:09:08:19",
+    "top_errors": []
+}
